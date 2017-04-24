@@ -2,8 +2,16 @@ package logic;
 
 public class Rotor {
 
-	public Rotor(String[] strings) {
-		// TODO Auto-generated constructor stub
+	private int initPosition;
+	private int currentPosition;
+	private String[] letters;
+	
+	public Rotor(String[] letters) {
+		this.letters = letters;
 	}
-
+	
+	public void setPosition(int initPosition){
+		this.initPosition = initPosition;
+		currentPosition = initPosition;
+	}
 }

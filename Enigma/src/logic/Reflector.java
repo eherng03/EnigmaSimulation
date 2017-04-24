@@ -2,8 +2,14 @@ package logic;
 
 public class Reflector {
 
-	public Reflector(String[] split) {
-		// TODO Auto-generated constructor stub
+	private String[] letters;
+	private int initPosition;
+	
+	public Reflector(String[] letters) {
+		this.letters = letters;
 	}
-
+	
+	public void setPosition(int initPosition){
+		this.initPosition = initPosition;
+	}
 }
