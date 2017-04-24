@@ -1,5 +1,7 @@
 package logic;
 
+import java.io.File;
+
 public class Machine {
 	private final Rotor[] ROTORS = {
 			new Rotor(("E K M F L G D Q V Z N T O W Y H X U S P A I B R C J").split(" ")),
@@ -32,6 +34,17 @@ public class Machine {
 		this.leftRotor.setInitPosition(leftLetter);
 		this.leftRotor.setInitPosition(leftLetter);
 		
+		
+	}
+
+	/**
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public File cifrate(File file) {
+		return file;
+		// TODO Auto-generated method stub
 		
 	}
 }

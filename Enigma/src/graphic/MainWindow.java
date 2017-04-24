@@ -3,17 +3,26 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import logic.Machine;
+
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 
 public class MainWindow {
 
 	private JFrame frame;
 	private JPanel image;
+	private File originalFile;
+	private File cifratedFile;
+	private Machine enigma;
 
 	/**
 	 * Launch the application.
@@ -55,7 +64,9 @@ public class MainWindow {
 		JButton btnCifrarMensaje = new JButton("Cifrar mensaje");
 		btnCifrarMensaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//abrir fichero con el mensaje
+				selectFile();
+				cifrar();
+				saveFile();
 				//llamar a cifrador
 				//preguntar donde guardarlo
 			}
@@ -64,5 +75,39 @@ public class MainWindow {
 		btnCifrarMensaje.setFont(new Font("Candara", Font.BOLD, 18));
 		btnCifrarMensaje.setBounds(10, 261, 414, 47);
 		frame.getContentPane().add(btnCifrarMensaje);
+	}
+
+	/**
+	 * 
+	 */
+	protected void saveFile() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * 
+	 */
+	protected void cifrar() {
+		SelectRotorsWindow selectRotors = new SelectRotorsWindow(this);
+		selectRotors.setVisible(true);
+		
+		cifratedFile = enigma.cifrate(originalFile);
+	}
+	
+	public void setMachine(Machine machine){
+		this.enigma = machine;
+	}
+
+	/**
+	 * 
+	 */
+	protected void selectFile() {
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setCurrentDirectory(new File("./"));
+		int result = fileChooser.showOpenDialog(null);
+		if (result == JFileChooser.APPROVE_OPTION) {
+		    originalFile = fileChooser.getSelectedFile();
+		}
 	}
 }
