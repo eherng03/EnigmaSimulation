@@ -10,7 +10,9 @@ public class Rotor {
 		this.letters = letters;
 	}
 	
-	public void setPosition(int initPosition){
+	public void setInitPosition(char initPosition){
+		
+		//TODO cambiar, buscar el char en el alfabeto
 		this.initPosition = initPosition;
 		currentPosition = initPosition;
 	}

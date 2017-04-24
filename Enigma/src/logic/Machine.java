@@ -22,10 +22,16 @@ public class Machine {
 	private Rotor rightRotor;
 	private Reflector reflector;
 	
-	public Machine(int reflector, int leftRotor, int middleleftRotor, int rightleftRotor) {
+	public Machine(int reflector, int leftRotor, int middleRotor, int rightRotor, char leftLetter, char middleLetter, char rightLetter) {
 		this.reflector = REFLECTORS[reflector - 1];
 		this.leftRotor = ROTORS[leftRotor - 1];
-		this.middleRotor = ROTORS[middleleftRotor - 1];
-		this.rightRotor = ROTORS[rightleftRotor - 1];
+		this.middleRotor = ROTORS[middleRotor - 1];
+		this.rightRotor = ROTORS[rightRotor - 1];
+		
+		this.leftRotor.setInitPosition(leftLetter);
+		this.leftRotor.setInitPosition(leftLetter);
+		this.leftRotor.setInitPosition(leftLetter);
+		
+		
 	}
 }
