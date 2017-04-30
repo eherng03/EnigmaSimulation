@@ -1,19 +1,18 @@
 package graphic;
-
+//---------------------------------------
+import logic.Machine;
+//---------------------------------------
 import java.awt.Color;
-import java.awt.EventQueue;
-
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+//---------------------------------------
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import logic.Machine;
-
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+//---------------------------------------
 
 /**
  * 
@@ -22,9 +21,6 @@ import java.awt.event.ActionEvent;
  */
 public class SelectRotorsWindow extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
@@ -32,12 +28,12 @@ public class SelectRotorsWindow extends JFrame {
 	private JTextField txtSeleccioneTresRotores;
 	private MainWindow parent;
 
-	JComboBox<Integer> rotorIzq;
-	JComboBox<Character> letraIzq;
-	JComboBox<Integer> rotorDerecho;
-	JComboBox<Character> letraDerecho;
-	JComboBox<Integer> rotorMedio;
-	JComboBox<Character> letraMedio;
+	private JComboBox<Integer> rotorIzq;
+	private JComboBox<Character> letraIzq;
+	private JComboBox<Integer> rotorDerecho;
+	private JComboBox<Character> letraDerecho;
+	private JComboBox<Integer> rotorMedio;
+	private JComboBox<Character> letraMedio;
 	private JComboBox<Integer> reflector;
 
 	
@@ -67,7 +63,7 @@ public class SelectRotorsWindow extends JFrame {
 		contentPane.add(txtSeleccioneTresRotores);
 		txtSeleccioneTresRotores.setColumns(10);
 		
-		
+		//----------------------------------------------------------------------------------------------------------
 		createTextField("Rotor 1:  E K M F L G D Q V Z N T O W Y H X U S P A I B R C J", 10, 292, 311, 20);
 		createTextField("Rotor 2:  A J D K S I R U X B L H W T M C Q G Z N P Y F V O E", 10, 323, 311, 20);
 		createTextField("Rotor 3:  B D F H J L C P R T X V Z N Y E I W G A K M U S Q O", 10, 354, 311, 20);
@@ -76,19 +72,19 @@ public class SelectRotorsWindow extends JFrame {
 		createTextField("Rotor 6:  J P G V O U M F Y Q B E N H Z R D K A S X L I C T W", 10, 447, 311, 20);
 		createTextField("Rotor 7:  N Z J H G R C X M Y S W B O U F A I V L P E K Q D T", 10, 478, 311, 20);
 		createTextField("Rotor 8:  F K Q H T L X O C B J S P D Z R A M E W N I U Y G V", 10, 509, 311, 20);
-		
+		//----------------------------------------------------------------------------------------------------------		
 		createTextField("Reflector 1:  E J M Z A L Y X V B W F C R Q U O N T S P I K H G D", 336, 292, 320, 20);
 		createTextField("Reflector 2:  Y R U H Q S L D P X N G O K M I E B F Z C W V J A T", 336, 323, 320, 20);
 		createTextField("Reflector 3:  F V P J I A O Y E D R Z X W G C T K U Q S B N M H L", 336, 323, 320, 20);
-		
+		//----------------------------------------------------------------------------------------------------------		
 		createTextField("Rotor Izquierdo", 109, 540, 86, 20);
 		createTextField("Rotor Medio", 224, 540, 86, 20);
 		createTextField("Rotor Derecho", 339, 540, 86, 20);
 		createTextField("Reflector", 454, 540, 86, 20);
-		
+		//----------------------------------------------------------------------------------------------------------		
 		createTextField("Rotor número:", 10, 573, 86, 20);
 		createTextField("Primera letra", 10, 604, 86, 20);
-		
+		//----------------------------------------------------------------------------------------------------------		
 		
 		//====================================================
 		//					ROTOR IZQUIERDO
@@ -154,13 +150,12 @@ public class SelectRotorsWindow extends JFrame {
 		});
 		btnAceptar.setBounds(569, 572, 86, 52);
 		contentPane.add(btnAceptar);
-		
-		
 	}
 	
 	
-	
-
+	/**
+	 * 
+	 */
 	protected void createMachine() {
 		int reflector = (int) this.reflector.getSelectedItem();
 		int leftRotor = (int) rotorIzq.getSelectedItem();
@@ -171,8 +166,8 @@ public class SelectRotorsWindow extends JFrame {
 		char middleLetter = (char) letraMedio.getSelectedItem();
 		char rightLetter = (char) letraDerecho.getSelectedItem();
 		
-		//TODO alba separar logica de fisica
-		Machine enigma = new Machine(reflector, leftRotor, middleRotor, rightRotor, leftLetter, middleLetter,rightLetter);
+		Machine enigma = new Machine(reflector, leftRotor, middleRotor, rightRotor, leftLetter, middleLetter, rightLetter);
+		parent.setMachine(enigma);
 	}
 
 	/**
@@ -188,7 +183,6 @@ public class SelectRotorsWindow extends JFrame {
 				return true;
 			}
 		}
-	
 		return false;
 	}
 

@@ -14,14 +14,17 @@ import java.awt.SystemColor;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.awt.event.ActionEvent;
 
 public class MainWindow {
 
 	private JFrame frame;
-	private JPanel image;
 	private File originalFile;
 	private File cifratedFile;
+	private String cifratedMessage;
 	private Machine enigma;
 
 	/**
@@ -57,7 +60,7 @@ public class MainWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		image = new EnigmaImage(414, 239);
+		JPanel image = new EnigmaImage(414, 239);
 		image.setBounds(10, 11, 414, 239);
 		frame.getContentPane().add(image);
 		
@@ -67,8 +70,6 @@ public class MainWindow {
 				selectFile();
 				cifrar();
 				saveFile();
-				//llamar a cifrador
-				//preguntar donde guardarlo
 			}
 		});
 		btnCifrarMensaje.setBackground(SystemColor.activeCaptionBorder);
@@ -81,7 +82,20 @@ public class MainWindow {
 	 * 
 	 */
 	protected void saveFile() {
-		// TODO Auto-generated method stub
+		String path = null;
+		JFileChooser fileChooser = new JFileChooser();
+		if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			path = file.getAbsolutePath();
+		}
+		try{
+			FileWriter fileWritter = new FileWriter(path);
+		    PrintWriter writer = new PrintWriter(fileWritter);
+		    writer.println(cifratedMessage);
+		    writer.close();
+		    fileWritter.close();
+		} catch (IOException e) {
+		}
 		
 	}
 
@@ -92,7 +106,11 @@ public class MainWindow {
 		SelectRotorsWindow selectRotors = new SelectRotorsWindow(this);
 		selectRotors.setVisible(true);
 		
-		cifratedFile = enigma.cifrate(originalFile);
+		try {
+			cifratedMessage = enigma.cifrate(originalFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void setMachine(Machine machine){

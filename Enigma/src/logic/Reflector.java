@@ -2,10 +2,17 @@ package logic;
 
 public class Reflector {
 
-	private String[] letters;
+	private char[] letters;
+	private int[] abecedario;
 	
-	public Reflector(String[] letters) {
-		this.letters = letters;
+	public Reflector(char[] abc) {
+		this.letters = abc;
+		for(int i = 0; i < abc.length; i++){
+			abecedario[i] = abc[i] - 'A'; 		//Le restamos 65 para que este en el rango de 0 a 
+		}
 	}
 	
+	public int convertir(int letter){
+		return abecedario[letter];
+	}
 }
