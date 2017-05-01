@@ -2,6 +2,7 @@ package graphic;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import logic.Machine;
@@ -67,8 +68,9 @@ public class MainWindow {
 		JButton btnCifrarMensaje = new JButton("Cifrar mensaje");
 		btnCifrarMensaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				selectFile();
-				selectRotors();
+				if(selectFile()){
+					selectRotors();
+				}
 			}
 		});
 		btnCifrarMensaje.setBackground(SystemColor.activeCaptionBorder);
@@ -98,7 +100,8 @@ public class MainWindow {
 	protected void saveFile() {
 		String path = null;
 		JFileChooser fileChooser = new JFileChooser();
-		if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+		int answer = fileChooser.showSaveDialog(null);
+		if (answer == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
 			path = file.getAbsolutePath();
 		}
@@ -109,8 +112,8 @@ public class MainWindow {
 		    writer.close();
 		    fileWritter.close();
 		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Error al escribir en el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
-		
 	}
 
 	/**
@@ -120,7 +123,7 @@ public class MainWindow {
 		try {
 			cifratedMessage = enigma.cifrate(originalFile);
 		} catch (IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error al leer el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -131,12 +134,15 @@ public class MainWindow {
 	/**
 	 * 
 	 */
-	private void selectFile() {
+	private boolean selectFile() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(new File("./"));
 		int result = fileChooser.showOpenDialog(null);
 		if (result == JFileChooser.APPROVE_OPTION) {
 		    originalFile = fileChooser.getSelectedFile();
+		}else{
+			return false;
 		}
+		return true;
 	}
 }
