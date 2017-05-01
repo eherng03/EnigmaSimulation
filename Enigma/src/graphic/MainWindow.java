@@ -68,14 +68,28 @@ public class MainWindow {
 		btnCifrarMensaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				selectFile();
-				cifrar();
-				saveFile();
+				selectRotors();
 			}
 		});
 		btnCifrarMensaje.setBackground(SystemColor.activeCaptionBorder);
 		btnCifrarMensaje.setFont(new Font("Candara", Font.BOLD, 18));
-		btnCifrarMensaje.setBounds(10, 261, 414, 47);
+		btnCifrarMensaje.setBounds(10, 261, 195, 47);
 		frame.getContentPane().add(btnCifrarMensaje);
+		
+		JButton button = new JButton("Guardar mensaje");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				saveFile();
+			}
+		});
+		button.setFont(new Font("Candara", Font.BOLD, 18));
+		button.setBackground(SystemColor.activeCaptionBorder);
+		button.setBounds(229, 261, 195, 47);
+		frame.getContentPane().add(button);
+	}
+
+	private void selectRotors() {
+		SelectRotorsWindow selectRotors = new SelectRotorsWindow(this);
 	}
 
 	/**
@@ -102,10 +116,7 @@ public class MainWindow {
 	/**
 	 * 
 	 */
-	protected void cifrar() {
-		SelectRotorsWindow selectRotors = new SelectRotorsWindow(this);
-		selectRotors.setVisible(true);
-		
+	public void cifrar() {	
 		try {
 			cifratedMessage = enigma.cifrate(originalFile);
 		} catch (IOException e) {
@@ -120,7 +131,7 @@ public class MainWindow {
 	/**
 	 * 
 	 */
-	protected void selectFile() {
+	private void selectFile() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(new File("./"));
 		int result = fileChooser.showOpenDialog(null);

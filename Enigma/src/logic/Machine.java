@@ -54,6 +54,7 @@ public class Machine {
 		String line = buffer.readLine();
 		
 		while (line != null) {
+			line = line.toUpperCase();
 			char[] characters = line.toCharArray();
 			for(int i = 0; i < characters.length; i++){
 				if(characters[i] == ' '){

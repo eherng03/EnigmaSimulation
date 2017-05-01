@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 //---------------------------------------
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
@@ -43,7 +44,8 @@ public class SelectRotorsWindow extends JFrame {
 	 */
 	public SelectRotorsWindow(MainWindow parent) {
 		this.parent = parent;
-	
+		this.setVisible(true);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 692, 693);
 		contentPane = new JPanel();
@@ -145,6 +147,8 @@ public class SelectRotorsWindow extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if(checkRotors()){
 					createMachine();
+				}else{
+					JOptionPane.showMessageDialog(null, "Debe seleccionar tres rotores distintos.", "title", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -168,6 +172,9 @@ public class SelectRotorsWindow extends JFrame {
 		
 		Machine enigma = new Machine(reflector, leftRotor, middleRotor, rightRotor, leftLetter, middleLetter, rightLetter);
 		parent.setMachine(enigma);
+		this.setVisible(false);
+		parent.cifrar();
+		this.dispose();
 	}
 
 	/**

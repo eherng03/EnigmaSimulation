@@ -7,6 +7,7 @@ public class Reflector {
 	
 	public Reflector(char[] abc) {
 		this.letters = abc;
+		abecedario = new int[letters.length];
 		for(int i = 0; i < abc.length; i++){
 			abecedario[i] = abc[i] - 'A'; 		//Le restamos 65 para que este en el rango de 0 a 
 		}

@@ -17,6 +17,8 @@ public class Rotor {
 	 */
 	public Rotor(char[] ds, char change1, char change2) {
 		this.letters = ds;
+		abecHaciaDelante = new int[letters.length];
+		abecHaciaAtras = new int[letters.length];
 		for(int i = 0; i < ds.length; i++){
 			abecHaciaDelante[i] = ds[i] - 'A'; 		//Le restamos 65 para que este en el rango de 0 a 
 		}
