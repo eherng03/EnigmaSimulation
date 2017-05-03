@@ -93,9 +93,9 @@ public class Machine {
 			if(middleRotor.isInChangePosition()){
 				leftRotor.advance();
 			}
-			middleRotor.advance();
-			rightRotor.advance();
+			middleRotor.advance();	
 		}
+		rightRotor.advance();
 		
 	}
 }

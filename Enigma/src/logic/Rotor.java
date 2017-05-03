@@ -26,8 +26,12 @@ public class Rotor {
 			abecHaciaAtras[abecHaciaDelante[i]] = i;
 		}
 		this.change1 = change1 - 'A';
-		if(change2 != ' ')
+		if(change2 != ' '){
 			this.change2 = change2 - 'A';
+		}else{
+			this.change2 = -1;
+		}
+
 	}
 	
 	/**
@@ -56,7 +60,8 @@ public class Rotor {
 	 * @return
 	 */
 	public int convertDelante(int letter){
-		return abecHaciaDelante[(currentPosition + letter)%26];
+		int pos = (currentPosition + letter + 26)%26;				//+26 para que no de negativo
+		return (abecHaciaDelante[pos] - currentPosition + 26)%26;
 	}
 	
 	/**
@@ -65,7 +70,8 @@ public class Rotor {
 	 * @return
 	 */
 	public int convertDetras(int letter){
-		return abecHaciaAtras[(currentPosition + letter)%26];
+		int pos = (currentPosition + letter + 26)%26;				//+26 para que no de negativo
+		return (abecHaciaAtras[pos] - currentPosition + 26)%26;
 	}
 	
 	public boolean isInChangePosition(){
