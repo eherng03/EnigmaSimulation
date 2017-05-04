@@ -98,15 +98,17 @@ public class MainWindow {
 	 * 
 	 */
 	protected void saveFile() {
-		String path = null;
+		String path = "cifratedMessage";
 		JFileChooser fileChooser = new JFileChooser();
 		int answer = fileChooser.showSaveDialog(null);
 		if (answer == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
-			path = file.getAbsolutePath();
+			if(!("").equals(file.getAbsolutePath())){
+				path = file.getAbsolutePath();
+			}
 		}
 		try{
-			FileWriter fileWritter = new FileWriter(path);
+			FileWriter fileWritter = new FileWriter(path + ".txt");
 		    PrintWriter writer = new PrintWriter(fileWritter);
 		    writer.println(cifratedMessage);
 		    writer.close();
